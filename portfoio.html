@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Samruddhi Portfolio</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+}
+
+nav h2 {
+  font-weight: bold;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h1 {
+  font-size: 40px;
+}
+
+.hero p {
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* Projects */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 20px;
+  padding: 40px;
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background: #ff7eb3;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.7;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+  <h2>💻 Samruddhi</h2>
+  <div>
+    <a href="#">Home</a>
+    <a href="#projects">Projects</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Hi, I'm Samruddhi 👋</h1>
+  <!-- <p>CSE Student | Web Developer | Creative Thinker</p> -->
+</section>
+
+<section id="projects" class="projects">
+
+  <!-- Event Manager -->
+  <div class="card">
+    <h3>📅 Event Manager</h3>
+    <p>
+      A web app to create, manage, and track events with modern UI and local storage.
+    </p>
+    <a href="./web.html" target="_blank" class="btn">Open Project</a>
+  </div>
+
+  <!-- Calculator -->
+  <div class="card">
+    <h3>🧮 Calculator Pro</h3>
+    <p>
+      A stylish calculator with arithmetic, scientific functions, and history tracking.
+    </p>
+    <a href="./calculator.html" target="_blank" class="btn">Open Project</a>
+  </div>
+
+</section>
+
+<footer>
+  <!-- © 2026 Samruddhi Budde | Portfolio -->
+</footer>
+
+</body>
+</html>
