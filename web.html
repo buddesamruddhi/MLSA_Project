@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Event Manager</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Glass Card */
+.container {
+  width: 90%;
+  max-width: 800px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 25px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.form input, .form textarea {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.form textarea {
+  grid-column: span 2;
+  resize: none;
+}
+
+.add-btn {
+  grid-column: span 2;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #ff7eb3;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background: #ff4f9a;
+}
+
+/* Event Cards */
+.events {
+  margin-top: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.card {
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  animation: fadeIn 0.4s ease;
+  position: relative;
+}
+
+.card h3 {
+  margin-bottom: 5px;
+}
+
+.card p {
+  font-size: 14px;
+}
+
+.delete {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: red;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+  <h1>✨ Event Manager</h1>
+
+  <div class="form">
+    <input type="text" id="title" placeholder="Event Title">
+    <input type="date" id="date">
+    <input type="time" id="time">
+    <textarea id="desc" placeholder="Event Description"></textarea>
+    <button class="add-btn" onclick="addEvent()">Add Event</button>
+  </div>
+
+  <div class="events" id="eventList"></div>
+</div>
+
+<script>
+let events = JSON.parse(localStorage.getItem("events")) || [];
+
+function save() {
+  localStorage.setItem("events", JSON.stringify(events));
+}
+
+function render() {
+  let list = document.getElementById("eventList");
+  list.innerHTML = "";
+
+  events.forEach((e, index) => {
+    list.innerHTML += `
+      <div class="card">
+        <button class="delete" onclick="deleteEvent(${index})">×</button>
+        <h3>${e.title}</h3>
+        <p>📅 ${e.date} ⏰ ${e.time}</p>
+        <p>${e.desc}</p>
+      </div>
+    `;
+  });
+}
+
+function addEvent() {
+  let title = document.getElementById("title").value;
+  let date = document.getElementById("date").value;
+  let time = document.getElementById("time").value;
+  let desc = document.getElementById("desc").value;
+
+  if (!title || !date || !time) {
+    alert("Please fill all required fields");
+    return;
+  }
+
+  events.push({ title, date, time, desc });
+  save();
+  render();
+
+  // clear inputs
+  document.getElementById("title").value = "";
+  document.getElementById("date").value = "";
+  document.getElementById("time").value = "";
+  document.getElementById("desc").value = "";
+}
+
+function deleteEvent(index) {
+  events.splice(index, 1);
+  save();
+  render();
+}
+
+// load on start
+render();
+</script>
+
+</body>
+</html>
